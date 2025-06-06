@@ -36,12 +36,6 @@ def test_imports():
         print(f"❌ Failed to import Mistral AI client: {e}")
         return False
     
-    try:
-        import httpx
-        print("✅ HTTPX imported successfully")
-    except ImportError as e:
-        print(f"❌ Failed to import HTTPX: {e}")
-        return False
     
     return True
 

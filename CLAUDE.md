@@ -42,13 +42,9 @@ This is a Model Context Protocol (MCP) server that provides OCR capabilities usi
 **Server (`server.py`)**:
 - Uses FastMCP to create an MCP server named "Mistral OCR"
 - Initializes Mistral client with API key from environment
-- Provides 5 main tools and 2 resources
+- Provides 1 main tool and 2 resources
 
 **Tools Architecture**:
-- `ocr_document_url`: Process documents via URL
-- `ocr_document_base64`: Process base64-encoded documents  
-- `ocr_image_url`: Process images via URL (async)
-- `download_and_ocr`: Download and process from URL (async)
 - `ocr_local_file`: Process local files and save markdown output locally
 
 **Resources**:
@@ -57,11 +53,9 @@ This is a Model Context Protocol (MCP) server that provides OCR capabilities usi
 
 ### Key Patterns
 
-**Error Handling**: All tools return standardized `{"success": bool, "error": str, "metadata": dict}` format
+**Error Handling**: The tool returns standardized `{"success": bool, "error": str, "metadata": dict}` format
 
-**Async vs Sync**: Image processing and download tools are async; document URL/base64 tools are sync
-
-**Response Format**: All successful responses include `text` (extracted content in markdown) and `metadata` with processing details
+**Response Format**: Successful responses include `output_file` (path to generated markdown) and `metadata` with processing details
 
 ## Environment Setup
 
@@ -75,11 +69,11 @@ Create `.env` file or set environment variable before running.
 **Documents**: PDF, PPTX, DOCX
 **Images**: PNG, JPEG, AVIF
 
-All tools support optional `include_image_base64` parameter for image extraction with bounding boxes.
+The tool supports optional `include_image_base64` parameter for image extraction with bounding boxes.
 
 ## Local File Processing
 
-The `ocr_local_file` tool is the primary tool for processing local files:
+The `ocr_local_file` tool is the only tool for processing local files:
 - Takes a local file path and converts it to markdown
 - Automatically determines output path (changes extension from original to .md)
 - Supports custom output path via `output_path` parameter
