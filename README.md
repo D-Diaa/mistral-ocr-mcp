@@ -1,9 +1,10 @@
 # Mistral OCR MCP Server
 
-A Model Context Protocol (MCP) server that provides Optical Character Recognition (OCR) capabilities using Mistral AI's document processing service.
+A Model Context Protocol (MCP) server that provides Optical Character Recognition (OCR) capabilities using Mistral AI's document processing service. The primary use case is converting local PDF files to markdown format.
 
 ## Features
 
+- **Local file processing**: Convert PDF/DOCX/PPTX files to markdown format
 - Extract text from documents (PDF, PPTX, DOCX) and images (PNG, JPEG, AVIF)
 - Process documents via URL or base64 encoding
 - Preserve document structure in markdown format
@@ -81,6 +82,27 @@ python server.py
 
 ## Available Tools
 
+### `ocr_local_file` ⭐ **Primary Tool**
+Process a local file and save the output as markdown.
+
+**Parameters:**
+- `file_path` (str): Path to the local file to process
+- `output_path` (str, optional): Output path for markdown file (defaults to same name with .md extension)
+- `include_image_base64` (bool, optional): Include base64 encoded images
+
+**Returns:**
+- `success` (bool): Whether processing succeeded
+- `text` (str): Extracted markdown content
+- `output_file` (str): Path to the generated markdown file
+- `metadata` (dict): Processing details including pages processed
+
+**Example:**
+```python
+result = ocr_local_file("paper.pdf")
+# Creates paper.md in the same directory
+# result["output_file"] contains the full path to paper.md
+```
+
 ### `ocr_document_url`
 Extract text from a document using a URL.
 
@@ -136,8 +158,13 @@ Usage examples for the OCR tools.
 {
   "success": true,
   "text": "# Document Title\n\nExtracted text content in markdown format...",
+  "output_file": "/path/to/output.md",
   "metadata": {
-    "document_url": "https://example.com/document.pdf",
+    "input_file": "/path/to/input.pdf",
+    "output_file": "/path/to/output.md",
+    "media_type": "application/pdf",
+    "file_size_bytes": 1875210,
+    "pages_processed": 22,
     "include_image_base64": false
   }
 }

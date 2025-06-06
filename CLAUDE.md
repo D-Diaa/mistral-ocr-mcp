@@ -27,13 +27,14 @@ This is a Model Context Protocol (MCP) server that provides OCR capabilities usi
 **Server (`server.py`)**:
 - Uses FastMCP to create an MCP server named "Mistral OCR"
 - Initializes Mistral client with API key from environment
-- Provides 4 main tools and 2 resources
+- Provides 5 main tools and 2 resources
 
 **Tools Architecture**:
 - `ocr_document_url`: Process documents via URL
 - `ocr_document_base64`: Process base64-encoded documents  
 - `ocr_image_url`: Process images via URL (async)
 - `download_and_ocr`: Download and process from URL (async)
+- `ocr_local_file`: Process local files and save markdown output locally
 
 **Resources**:
 - `mistral-ocr://supported-formats`: Static format information
@@ -60,3 +61,18 @@ Create `.env` file or set environment variable before running.
 **Images**: PNG, JPEG, AVIF
 
 All tools support optional `include_image_base64` parameter for image extraction with bounding boxes.
+
+## Local File Processing
+
+The `ocr_local_file` tool is the primary tool for processing local files:
+- Takes a local file path and converts it to markdown
+- Automatically determines output path (changes extension from original to .md)
+- Supports custom output path via `output_path` parameter
+- Returns both the extracted text and the local path to the generated markdown file
+
+Example usage:
+```python
+result = ocr_local_file("paper.pdf")
+# Creates paper.md in the same directory
+# result["output_file"] contains the full path to paper.md
+```
