@@ -308,7 +308,6 @@ def ocr_local_file(
         
         return {
             "success": True,
-            "text": markdown_content,
             "output_file": str(output_file.absolute()),
             "metadata": {
                 "input_file": str(input_file.absolute()),

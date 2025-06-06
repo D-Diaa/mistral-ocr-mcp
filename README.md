@@ -121,7 +121,6 @@ Process a local file and save the output as markdown.
 
 **Returns:**
 - `success` (bool): Whether processing succeeded
-- `text` (str): Extracted markdown content
 - `output_file` (str): Path to the generated markdown file
 - `metadata` (dict): Processing details including pages processed
 
@@ -186,7 +185,6 @@ Usage examples for the OCR tools.
 ```json
 {
   "success": true,
-  "text": "# Document Title\n\nExtracted text content in markdown format...",
   "output_file": "/path/to/output.md",
   "metadata": {
     "input_file": "/path/to/input.pdf",
