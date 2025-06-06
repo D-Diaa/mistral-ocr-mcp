@@ -25,27 +25,50 @@ pip install -r requirements.txt
 
 3. Set up environment variables:
 ```bash
-cp .env.example .env
-# Edit .env and add your Mistral API key
+# Create .env file with your Mistral API key
+echo "MISTRAL_API_KEY=your_api_key_here" > .env
 ```
-
 
 ## Usage
-
-### Development Mode
-
-Run the server in development mode:
-
-```bash
-mcp dev mistral_ocr_mcp/server.py
-```
 
 ### Claude Desktop Integration
 
 Install the server for use with Claude Desktop:
 
 ```bash
-mcp install mistral_ocr_mcp/server.py
+# Install with environment variable
+mcp install server.py --name "Mistral OCR" -v MISTRAL_API_KEY=your_api_key_here
+
+# Or if you have .env file
+mcp install server.py --name "Mistral OCR"
+```
+
+This will automatically configure the server in Claude Desktop's settings.
+
+### Cursor Integration
+
+For Cursor IDE, add this server configuration to your MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "mistral-ocr": {
+      "command": "python",
+      "args": ["/path/to/mistral-ocr-mcp/server.py"],
+      "env": {
+        "MISTRAL_API_KEY": "your_api_key_here"
+      }
+    }
+  }
+}
+```
+
+### Development Mode
+
+Run the server in development mode for testing:
+
+```bash
+mcp dev server.py
 ```
 
 ### Direct Execution
@@ -53,7 +76,7 @@ mcp install mistral_ocr_mcp/server.py
 Run the server directly:
 
 ```bash
-python mistral_ocr_mcp/server.py
+python server.py
 ```
 
 ## Available Tools
