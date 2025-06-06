@@ -13,6 +13,45 @@ A Model Context Protocol (MCP) server that provides Optical Character Recognitio
 
 ## Installation
 
+### Option 1: Using uvx (Recommended)
+
+The simplest way to use this MCP server is with `uvx`:
+
+1. Clone this repository:
+```bash
+git clone https://github.com/D-Diaa/mistral-ocr-mcp.git
+cd mistral-ocr-mcp
+```
+
+2. Add to your Claude Desktop configuration (`~/Library/Application Support/Claude/claude_desktop_config.json`):
+```json
+{
+  "mcpServers": {
+    "Mistral OCR": {
+      "command": "uvx",
+      "args": [
+        "--from", "/path/to/mistral-ocr-mcp",
+        "mistral-ocr-mcp"
+      ],
+      "env": {
+        "MISTRAL_API_KEY": "your_api_key_here"
+      }
+    }
+  }
+}
+```
+
+### Option 2: Using MCP Install with uv
+
+```bash
+# Clone and install with editable package
+git clone https://github.com/D-Diaa/mistral-ocr-mcp.git
+cd mistral-ocr-mcp
+mcp install server.py --name "Mistral OCR" --with-editable . -v MISTRAL_API_KEY=your_api_key_here
+```
+
+### Option 3: Traditional pip installation
+
 1. Clone this repository:
 ```bash
 git clone https://github.com/D-Diaa/mistral-ocr-mcp.git
@@ -34,17 +73,7 @@ echo "MISTRAL_API_KEY=your_api_key_here" > .env
 
 ### Claude Desktop Integration
 
-Install the server for use with Claude Desktop:
-
-```bash
-# Install with environment variable
-mcp install server.py --name "Mistral OCR" -v MISTRAL_API_KEY=your_api_key_here
-
-# Or if you have .env file
-mcp install server.py --name "Mistral OCR"
-```
-
-This will automatically configure the server in Claude Desktop's settings.
+The server will automatically configure in Claude Desktop using any of the installation methods above.
 
 ### Cursor Integration
 

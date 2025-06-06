@@ -4,15 +4,30 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Common Commands
 
+### Installation Options
+
+**Option 1: uvx (Recommended)**
+- Install for Claude Desktop using uvx: Add to `claude_desktop_config.json`:
+  ```json
+  "Mistral OCR": {
+    "command": "uvx",
+    "args": ["--from", "/path/to/mistral-ocr-mcp", "mistral-ocr-mcp"],
+    "env": {"MISTRAL_API_KEY": "your_api_key"}
+  }
+  ```
+
+**Option 2: MCP Install with uv**
+- Install with editable package: `mcp install server.py --name "Mistral OCR" --with-editable . -v MISTRAL_API_KEY=your_key`
+
+**Option 3: Traditional**
+- Install for Claude Desktop: `mcp install server.py`
+- Install dependencies: `pip install -r requirements.txt`
+
 ### Development
 - Run server in development mode: `mcp dev server.py`
-- Install for Claude Desktop: `mcp install server.py`
 - Direct execution: `python server.py`
 - Run tests: `python test_server.py`
-
-### Dependencies
-- Install dependencies: `pip install -r requirements.txt`
-- Install with dev dependencies: `pip install -e .[dev]`
+- Build package: `uv build`
 
 ### Testing
 - Test setup and environment: `python test_server.py`
