@@ -22,7 +22,6 @@ wheels/
 
 # Data
 *.pdf
-*.md
 
 # Virtual Environment
 venv/
