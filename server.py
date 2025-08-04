@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-mcp = FastMCP("mistral-ocr", description="Mistral OCR Document Processing Server")
+mcp = FastMCP("mistral-ocr")
 
 # Initialize Mistral client
 api_key = os.getenv("MISTRAL_API_KEY")
